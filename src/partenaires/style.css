@@ -1,0 +1,273 @@
+.main-container {
+    justify-content: center;
+    text-align: center;
+
+}
+
+
+
+.main {
+    /* position: absolute;
+    top: 220px;
+    left: 16%; */
+    padding-top: 220px;
+
+
+}
+
+.main-container h1 {
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 800;
+    font-family: sans-serif;
+    font-size: 55px;
+    text-align: center;
+    justify-content: center;
+    z-index: 100;
+
+}
+
+.main-container p {
+    font-size: 30px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.divBouton {
+    display: flex;
+    grid-gap: 50px;
+    /* margin-left: 300px; */
+    margin-top: 50px;
+    justify-content: center;
+
+}
+
+.divBouton a {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+.btn1 {
+    color: #fff;
+    background-color: #F5841F;
+    cursor: pointer;
+}
+
+.btn2 {
+    color: #F5841F;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+
+@media (max-width:768px) {}
+
+
+/* Participant */
+
+/* @media (max-width:768px) {
+    .header__middle {
+        display: none;
+    }
+} */
+
+
+
+/* Reserve */
+
+[type=radio] {
+    position: relative;
+    top: 465px;
+}
+
+#slider {
+    height: 33vw;
+    width: 40vw;
+    margin: 0 auto;
+    /* left: -20%; */
+    position: relative;
+    top: 100px;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+#slider label {
+    margin: auto;
+    background-color: #fff;
+    width: 60%;
+    height: 100%;
+    border-radius: 15px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+    padding: 5px 10px;
+}
+
+
+#s1:checked~#slide3,
+#s2:checked~#slide1,
+#s3:checked~#slide2 {
+    box-shadow: 0px 15.371px 51.2366px rgba(59, 59, 59, 0.12);
+    transform: translate3d(-100%, 0, -100px);
+}
+
+#s1:checked~#slide1,
+#s2:checked~#slide2,
+#s3:checked~#slide3 {
+    box-shadow: 0px 15.371px 51.2366px rgba(59, 59, 59, 0.12);
+    transform: translate3d(0, 0, 0);
+}
+
+#s1:checked~#slide2,
+#s2:checked~#slide3,
+#s3:checked~#slide1 {
+    box-shadow: 0px 15.371px 51.2366px rgba(59, 59, 59, 0.12);
+    transform: translate3d(100%, 0, -100px);
+}
+
+.button {
+    position: absolute;
+    top: 280px;
+    left: 8%;
+}
+
+.button a {
+    color: #fff;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.button1 {
+    position: absolute;
+    left: 90%;
+    top: 280px;
+}
+
+.button1 a {
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+label h1 {
+    color: #0F3F62;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+label p {
+    color: #0F3F62;
+    font-weight: 600;
+    font-size: 40px;
+}
+
+
+
+.table {
+    text-align: justify;
+    font-size: 12px;
+    color: #666666;
+    font-weight: 400;
+    margin-left: 20px;
+}
+
+.table1 {
+    text-align: justify;
+    font-size: 12px;
+    color: #666666;
+    font-weight: 400;
+    margin-left: 30px;
+}
+
+.table1 td {
+    padding: 3px 30px;
+
+}
+
+.table td {
+    padding: 3px 20px;
+
+}
+
+.icon {
+    color: #F5841F;
+}
+
+.btn {
+
+    border: 2px solid #F5841F;
+    cursor: pointer;
+    padding: 10px 30px;
+    position: relative;
+    top: 20px;
+    text-decoration: none;
+    /* margin-top: 20px; */
+    border-radius: 10px;
+    background-color: #fff;
+    color: #F5841F;
+
+}
+
+@media (max-width:768px) {
+
+    /* .containe {
+        height: 160vh;
+    } */
+
+    #slider {
+        height: 90vh;
+        margin-left: 110px;
+        /* padding-top: 90px; */
+    }
+
+    #slider label {
+        background-color: #fff;
+        width: 300px;
+    }
+
+    #s1:checked~#slide3,
+    #s2:checked~#slide1,
+    #s3:checked~#slide2 {
+        box-shadow: 0px 15.371px 51.2366px rgba(59, 59, 59, 0.12);
+        transform: translate3d(-20%, 0, -100px);
+    }
+
+    #s1:checked~#slide2,
+    #s2:checked~#slide3,
+    #s3:checked~#slide1 {
+        box-shadow: 0px 15.371px 51.2366px rgba(59, 59, 59, 0.12);
+        transform: translate3d(20%, 0, -100px);
+    }
+
+    .button {
+        /* margin-top: 120px; */
+        margin-left: -20px;
+
+    }
+
+    .button1 {
+        margin-left: 15px;
+        /* margin-top: 100px; */
+    }
+
+    [type=radio] {
+        margin-top: 30px;
+        position: relative;
+        left: 60px;
+    }
+
+    .step {
+        position: relative;
+        right: 400px;
+        top: 50px;
+    }
+
+
+}
+
+
+/* Login */

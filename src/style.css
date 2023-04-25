@@ -1,0 +1,204 @@
+.icon1 {
+    position: relative;
+    left: 47%;
+    bottom: 30px;
+    color: #000000;
+    opacity: 0.5;
+}
+
+.icon2 {
+    position: relative;
+    left: 47%;
+    bottom: 30px;
+    color: #000000;
+    opacity: 0.5;
+}
+
+.mdp {
+    text-align: right;
+    text-decoration: none;
+    position: relative;
+    bottom: 20px;
+    color: #000000;
+    opacity: 0.5;
+    font-size: 14px;
+}
+
+#email,
+#password {
+    font-size: 12px;
+    color: #000000;
+    opacity: 0.5;
+    text-align: justify;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #000000;
+    margin-top: 30px;
+
+}
+
+
+.main-section {
+    grid-gap: 200px;
+    justify-content: center;
+    /* width: 50%; */
+    padding-top: 100px;
+
+}
+
+.vertical-line {
+    border-left: 0.5px solid #666666;
+    height: 45vh;
+    opacity: 0.1;
+    margin-top: 90px;
+    margin-right: 40px;
+}
+
+.section {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    margin-left: 300px;
+    width: 60%;
+    height: 73vh;
+
+
+}
+
+.main-container1 {
+    margin-right: 80px;
+}
+
+.main-container1 h1 {
+    color: #0F3F62;
+    font-size: 29px;
+}
+
+.main-container1 p {
+    color: #0F3F62;
+    font-size: 40px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.main-container1 p span {
+    color: #0F3F62;
+    font-size: 29px;
+    margin-top: 20px;
+}
+
+
+
+@media (max-width:768px) {
+
+    .containe {
+        height: 100%;
+    }
+
+    .main-section {}
+
+    .section {
+        display: block;
+        margin-left: 30px;
+        justify-content: center;
+        align-items: center;
+        height: 1060px;
+        padding: 5px 10px;
+        width: 50%;
+        background-color: #fff;
+
+    }
+
+    .vertical-line {
+        display: none;
+    }
+
+    .main-container1 {
+        margin-left: 90px;
+
+    }
+
+    .bton {
+        position: relative;
+        /* top: 560px; */
+        right: 200px;
+    }
+
+    .table {
+        margin-left: -50px;
+        width: 100%;
+        padding-right: 20px;
+
+    }
+
+    .table tr td {
+        padding: 5px 5px;
+    }
+
+    .stepper {
+        position: relative;
+        right: 450px;
+    }
+
+
+}
+
+.main-card {
+    padding-top: 150px;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background-color: #fff;
+    height: 330px;
+    justify-content: center;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 550px;
+    border-radius: 15px;
+
+}
+
+.card p {
+    padding-top: 120px;
+    font-size: 60px;
+    color: #0F3F62;
+    font-weight: 600;
+
+}
+
+.card span {
+    line-height: 60px;
+    background-color: #FCA13A;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.steppe {
+    margin-top: 30px;
+}
+
+@media (max-width:768px) {
+    .main-card {
+        padding-top: 100px;
+    }
+
+    .card {
+        margin-left: 60px;
+        width: 45%;
+    }
+
+    .steppe {
+        position: relative;
+        right: 450px;
+    }
+
+}
