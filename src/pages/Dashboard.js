@@ -11,6 +11,10 @@ const Dashboard = () => {
         <div>
             <Navbar />
 
+            <div className="divtitle" style={{ color: "#0F0F0F", position: "absolute" }}>
+                <p>Dashboard</p>
+            </div>
+
             <div className="main-card">
                 <div className="row">
                     <div className="card1">

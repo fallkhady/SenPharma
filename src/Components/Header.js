@@ -57,7 +57,7 @@ const NavMenu = () => {
                                 <li className="menu-item " ><NavLink className="nav-link" onClick={toggleClass} activeClassName='is-active' to={`/actualite`}> Actualité </NavLink> </li>
                                 <li className="menu-item " ><NavLink className="nav-link" onClick={toggleClass} activeClassName='is-active' to={`/partenaire`}> Partenaire </NavLink> </li>
                                 <li className="menu-item " ><NavLink className="nav-link" onClick={toggleClass} activeClassName='is-active' to={`/contact`}> nous contacter </NavLink> </li>
-                                <li className="menu-item " ><NavLink onClick={toggleClass} activeClassName='is-active' to={`/connexion`}> <button className="bouton"> Connexion</button> </NavLink> </li>
+                                <li className="menu-item " ><NavLink onClick={toggleClass} activeClassName='is-active' to={`/login`}> <button className="bouton"> Connexion</button> </NavLink> </li>
 
 
 

@@ -1,5 +1,5 @@
 .nav {
-    margin-top: -17px;
+    margin-top: 0px;
 }
 
 .menu {
@@ -9,6 +9,7 @@
     width: 15%;
     height: 73.6vh;
     padding: 20px 30px;
+    text-decoration: none;
 }
 
 .link_item {
@@ -27,16 +28,10 @@
 }
 
 
-.isactive {
-    background-color: #F5841F;
-    border-radius: 20px;
-    width: 60%;
-    padding: 0px 10px;
 
-}
 
 @media (max-width: 748px) {
-    ul.menu {
+    .menu {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -62,10 +57,8 @@
     }
 
 
-    /* a.active {
-        background-color: #F5841F;
-        border-radius: 20px;
-        color: #F5841F;
-    } */
+    .link_item_acive {
+        color: "red"
+    }
 
 }

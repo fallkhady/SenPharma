@@ -3,6 +3,12 @@
     margin-left: 300px;
 }
 
+.divtitle {
+    bottom: 580px;
+    left: 280px;
+    font-weight: 600;
+}
+
 .row {
     display: flex;
     grid-gap: 40px;

@@ -43,8 +43,8 @@ body {
 .active {
     background-color: #F5841F;
     border-radius: 20px;
-    color: #F5841F;
-    padding: 5px 15px;
+    color: #FFFF;
+    padding: 8px 15px;
 }
 
 .active:hover {

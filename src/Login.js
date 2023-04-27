@@ -66,6 +66,7 @@ export default function Login() {
                         <Button
                             type="submit"
                             fullWidth
+                            onclick="window.location.href = 'http://localhost:3000/dashboard'"
                             sx={{ mt: 3, mb: 2, backgroundColor: "#FCA13A", height: "50px", color: "#fff" }}
                         >
                             Connexion

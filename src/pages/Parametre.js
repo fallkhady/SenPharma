@@ -22,6 +22,9 @@ const Parametre = () => {
     return (
         <div>
             <Navbar />
+            <div className="divtitle" style={{ color: "#0F0F0F", position: "absolute" }}>
+                <p>Paramètre</p>
+            </div>
             <Box sx={{}}>
                 <div className="contenu" style={{ backgroundColor: "#fff", boxShadow: "0px 3.59338px 3.59338px rgba(0, 0, 0, 0.03)", width: "50%", position: "relative", bottom: "490px", left: "370px", padding: "10px 100px" }}>
                     <div className="titre" style={{ marginRight: "70px" }}>

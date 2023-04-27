@@ -1,10 +1,11 @@
 
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from '../images/logo1.png';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import Sidebar from '../Components/Sidebar';
+import Sidebar from './Sidebar';
+import SidebarData from './data/SidebarData';
 import '../Components/Navbar.css';
 import { FiChevronDown } from "react-icons/fi";
 import Avatar from '@mui/material/Avatar';
@@ -49,7 +50,9 @@ const Navbar = () => {
                     {/* Responsive Menu Button */}
 
                     <ul className="nav-menu">
-                        <Link to="/" className="nav-item item1" >Dashboard </Link>
+
+                        <Link to="/" className="nav-item item1" >
+                        </Link>
                         <Link className="nav-item" >
                             <form id="searchbox " method="get " action="/search " autocomplete="off ">
                                 <input name="q " type="text " size="15" placeholder="Rechercher un client" />

@@ -13,6 +13,7 @@ import CustomMinitableau from './Components/CustomMinitableau';
 import Transaction from './pages/Transaction';
 import Database from './pages/Database';
 import Parametre from './pages/Parametre';
+import Sidebar from './Components/Sidebar';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/sidebar" element={<Sidebar />} />
           <Route path="/" element={<Partenaire />} />
           <Route path="/tableau" element={<Tableau />} />
           <Route path="/partenaire/participant" element={<Participant />} />
