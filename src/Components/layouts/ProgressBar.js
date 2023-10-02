@@ -5,11 +5,11 @@ const ProgressBar = (props) => {
 
   const containerStyles = {
     height: 10,
-    width: "65%",
+    width: "50%",
     backgroundColor: "#e0e0de",
     borderRadius: 50,
     marginTop: 30,
-    marginLeft: "100px",
+    marginLeft: "80px",
     justifyContent: "center",
     // textAlign: "justify"
   };
@@ -25,8 +25,9 @@ const ProgressBar = (props) => {
 
   const labelStyles = {
     // padding: 5,
-    marginLeft: "300px",
+    marginLeft: "250px",
     color: "red",
+    marginRight: "20px",
     fontWeight: "bold",
   };
   const test = {
@@ -37,7 +38,7 @@ const ProgressBar = (props) => {
   const titre = {
     // marginTop: "50px",
     textAlign: "center",
-    right: "200px",
+    right: "130px",
     bottom: "5px",
     position: "relative",
   };
@@ -47,6 +48,7 @@ const ProgressBar = (props) => {
       <div style={containerStyles}>
         <div style={titre}>{`${tittle}`}</div>
         <div style={fillerStyles}>
+
           <span style={labelStyles}>{`${completed}`}</span>
         </div>
       </div>

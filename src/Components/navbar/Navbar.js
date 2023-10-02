@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../images/logo1.png";
-import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import Sidebar from "../sidebar/Sidebar";
-import sidebarLinks from "../sidebar/sidebarLinks";
-
-import { FiChevronDown } from "react-icons/fi";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,11 +13,15 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Box from "@mui/material/Box";
+import api from "../../service/api";
+import Swal from "sweetalert2";
+
 
 const Navbar = () => {
+  const [userId, setUserId] = useState();
+  const [notification, setNotification] = useState();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -30,6 +30,65 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleChange = () => {
+    window.location.href = '/parametre'
+
+  };
+
+  const handleClickChange = () => {
+    window.location.href = '/profil'
+
+  };
+
+
+
+
+
+  const responData = JSON.parse(localStorage.getItem("userData"))
+
+
+  const signout = async () => {
+    const val = JSON.parse(localStorage.getItem("userData"))
+    const user = {
+      userId: val.id
+    }
+    console.log(user)
+    setUserId(val.id)
+    try {
+      const data = await api.signout(user)
+
+      if (data) {
+        localStorage.clear();
+        window.location.href = "/"
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+  };
+
+
+  const getnotif = async () => {
+    try {
+
+      const response = await api.getnotification()
+      setNotification(response.data);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getnotif();
+  }, []);
+
+
+  const handleOpen = () => {
+    window.location.href = "./transaction"
+  }
+
 
   return (
     <div>
@@ -43,34 +102,21 @@ const Navbar = () => {
           {/* Responsive Menu Button */}
 
           <ul className="nav-menu">
-            <Link to="/" className="nav-item item1"></Link>
-            <Link className="nav-item">
-              <form
-                id="searchbox "
-                method="get "
-                action="/search "
-                autocomplete="off "
-              >
-                <input
-                  name="q "
-                  type="text "
-                  size="15"
-                  placeholder="Rechercher un client"
-                />
-                <SearchIcon
-                  sx={{ position: "relative", right: "30px", color: "#1362FC" }}
-                  className="icone"
-                />
-              </form>
-            </Link>
 
             <div className="nav-left">
-              <Link to="/" className="nav-item">
-                <div className="notification">
-                  <NotificationsNoneIcon sx={{ color: "#1362FC" }} />
-                  <span className="notif"></span>
+              <Link to="" className="nav-item">
+                <div className="notification" onClick={handleOpen}>
+                  <NotificationsNoneIcon sx={{ color: "#1362FC", fontSize: "35px" }} />
+                  <span className="notif">
+                    {notification?.count}
+                  </span>
+
                 </div>
               </Link>
+
+              <Typography
+                sx={{ fontSize: "12px", marginTop: "20px" }}
+              > {responData?.username} </Typography>
 
               <Box
                 sx={{
@@ -79,7 +125,7 @@ const Navbar = () => {
                   textAlign: "center",
                 }}
               >
-                <Tooltip title="Account settings">
+                <Tooltip>
                   <IconButton
                     onClick={handleClick}
                     size="small"
@@ -88,7 +134,7 @@ const Navbar = () => {
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                   >
-                    <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+                    <Avatar sx={{ width: 50, height: 50 }}></Avatar>
                   </IconButton>
                 </Tooltip>
               </Box>
@@ -127,52 +173,27 @@ const Navbar = () => {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem onClick={handleClose}>
-                  <Avatar /> Profile
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Avatar /> My account
+
+                <MenuItem onClick={handleClickChange}>
+                  <Avatar /> Mon compte
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleChange}>
                   <ListItemIcon>
                     <PersonAdd fontSize="small" />
                   </ListItemIcon>
-                  Add another account
+                  Ajouter un autre compte
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <ListItemIcon>
-                    <Settings fontSize="small" />
-                  </ListItemIcon>
-                  Settings
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={signout}>
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>
-                  Logout
+                  Se deconecter
                 </MenuItem>
               </Menu>
 
-              <Typography
-                sx={{ minWidth: 100, fontSize: "10px", fontSize: "12px" }}
-              >
-                Abdou Ndiaye <br />{" "}
-                <span style={{ color: "#2E2E2E", fontSize: "8px" }}>
-                  superadmin
-                </span>{" "}
-              </Typography>
-              <Link
-                to="#"
-                style={{
-                  marginTop: "8px",
-                  position: "relative",
-                  right: "15px",
-                }}
-              >
-                {" "}
-                <FiChevronDown />{" "}
-              </Link>
+
+
             </div>
           </ul>
         </nav>

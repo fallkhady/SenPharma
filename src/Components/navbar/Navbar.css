@@ -13,10 +13,7 @@
 }
 
 .nav-menu {
-  display: flex;
-  grid-gap: 130px;
-  padding-top: 10px;
-  margin-left: 80px;
+  margin-left: 700px;
 
 
 
@@ -54,20 +51,22 @@
 
 .notification .notif {
   position: absolute;
-  left: 10%;
+  left: 7%;
   font-size: 2.25rem;
   border-radius: 50%;
-  width: 10em / 8;
-  height: 10em / 8;
+  width: 15em / 8;
+  height: 15em / 8;
   background-color: #FFC368;
   border: 4px solid #FFC368;
   text-align: center;
+  font-size: 10px;
+  color: #FFFFFF;
 }
 
 .nav-left {
   display: flex;
   position: relative;
-  left: 10px;
+  left: 200px;
   grid-gap: 15px;
 }
 

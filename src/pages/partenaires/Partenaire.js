@@ -12,18 +12,26 @@ const Partenaire = () => {
         <div className="main-container">
           <h1>Devenez partenaire</h1>
           <p>
-            Au salon international du médicament des dispositifs médicaux <br />{" "}
-            et de la parapharmacie se tiendra les 19, 20 et 21 juillet 2023 au{" "}
+            Au salon international du médicament des dispositifs médicaux et de la parapharmacie. <br />{" "}
+            Le comité d’organisation de SENPHARMA vous informe du report du salon initialement prévu les <br />{" "} 19 ,20 et le 21 juillet 2023, aux 22 ,23 et 24 Mai 2024 au {" "}
             <br /> CICAD.
           </p>
         </div>
 
         <div className="divBouton">
-          <Link to="/partenaire/reserve" className="btn1">
-            Réserver Stand
+          <Link
+            to="/partenaire/reserve"
+            className="btn1"
+            style={{ textTransform: "uppercase" }}
+          >
+            Réservez Stand
           </Link>
-          <Link to="/partenaire/participant" className="btn2">
-            Devenir participant
+          <Link
+            to="/partenaire/sponsor"
+            className="btn2"
+            style={{ textTransform: "uppercase" }}
+          >
+            Offres Sponsoring
           </Link>
         </div>
       </div>

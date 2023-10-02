@@ -1,12 +1,27 @@
 .main-card {
-    margin-top: -650px;
-    margin-left: 300px;
+    margin-top: -600px;
+    margin-left: 290px;
 }
 
+
+
+/* .main-card4 .card4 {
+    background-color: #fff;
+    height: 330px;
+    justify-content: center;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 550px;
+    border-radius: 15px;
+
+} */
 .divtitle {
-    bottom: 580px;
+    bottom: 530px;
     left: 280px;
     font-weight: 600;
+    font-size: 25px;
 }
 
 .row {
@@ -68,4 +83,74 @@
         right: 260px;
         width: 50%;
     }
+
+    .contenu{
+        position: relative;
+        right: 800px;
+        top: 0px;
+    }
+
+    .btcontenu {
+        margin-top: 30px;
+    }
+}
+
+.select{
+    width: 592px;
+}
+
+/* sponsor */
+
+.sponsor-component {
+    height: 100%;
+    background-image: url("../images/image1.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+.sponsor-component .middle-section {
+    padding-top: 5rem;
+}
+
+.middle-section .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-divider .trait-continu {
+    width: 500px;
+    height: 1px;
+    background-color: #ffff;
+    text-transform: capitalize;
+
+}
+
+.section-divider h1 {
+    color: #fff;
+    padding: 0px 20px
+}
+
+
+.cardContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+}
+
+.cardContainer .card-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 20px;
+    color: #0F3F62;
+    box-shadow: 0px 0px 56px -17px #FCA13A;
+}
+
+.card-content p {
+    font-size: 13px;
 }

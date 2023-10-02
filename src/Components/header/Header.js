@@ -64,7 +64,7 @@ const NavMenu = () => {
                     exact
                     activeClassName="is-active"
                     onClick={toggleClass}
-                    to={`/Accueil`}
+                    to={`https://senpharma.org/`}
                   >
                     {" "}
                     Accueil{" "}
@@ -75,7 +75,7 @@ const NavMenu = () => {
                     className="nav-link"
                     onClick={toggleClass}
                     activeClassName="is-active"
-                    to={`/actualite`}
+                    to={`https://senpharma.org/actualite/`}
                   >
                     {" "}
                     Actualité{" "}
@@ -86,7 +86,7 @@ const NavMenu = () => {
                     className="nav-link"
                     onClick={toggleClass}
                     activeClassName="is-active"
-                    to={`/`}
+                    to={`/partenaire/partenaire`}
                   >
                     {" "}
                     Partenaire{" "}
@@ -97,7 +97,29 @@ const NavMenu = () => {
                     className="nav-link"
                     onClick={toggleClass}
                     activeClassName="is-active"
-                    to={`/contact`}
+                    to={`/partenaire/participant`}
+                  >
+                    {" "}
+                    Participants{" "}
+                  </NavLink>{" "}
+                </li>
+                <li className="menu-item ">
+                  <NavLink
+                    className="nav-link"
+                    onClick={toggleClass}
+                    activeClassName="is-active"
+                    to={`/partenaire/pharmadetente`}
+                  >
+                    {" "}
+                    Pharma Détente{" "}
+                  </NavLink>{" "}
+                </li>
+                <li className="menu-item ">
+                  <NavLink
+                    className="nav-link"
+                    onClick={toggleClass}
+                    activeClassName="is-active"
+                    to={`https://senpharma.org/contact/`}
                   >
                     {" "}
                     nous contacter{" "}
@@ -107,7 +129,7 @@ const NavMenu = () => {
                   <NavLink
                     onClick={toggleClass}
                     activeClassName="is-active"
-                    to={`/login`}
+                    to={`/`}
                   >
                     {" "}
                     <button className="bouton"> Connexion</button>{" "}

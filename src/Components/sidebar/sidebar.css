@@ -6,18 +6,28 @@
     display: block;
     line-height: 70px;
     background-color: #FCFCFC;
-    width: 15%;
+    width: 17%;
     height: 73.6vh;
-    padding: 20px 30px;
+    padding: 15px 30px;
     text-decoration: none;
+    color: #BFBFBF;
+    font-size: 13px;
+
 }
+
+/* .menu a{
+    color: #BFBFBF;
+
+} */
+
+
 
 .link_item {
     display: block;
     text-align: justify;
     text-decoration: none;
     /* text-align: center; */
-    margin-left: 1em;
+    margin-left: 0.1em;
     color: #BFBFBF;
 
 

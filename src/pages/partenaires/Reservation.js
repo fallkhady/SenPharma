@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CheckCircle } from "@mui/icons-material";
 import Header from "../../Components/header/Header";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -14,6 +13,7 @@ import StepLabel from "@mui/material/StepLabel";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
+import api from "../../service/api";
 import "./style.css";
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
@@ -83,15 +83,74 @@ const steps = ["Choix", "Formulaire", "Reservation", "Merci"];
 
 const Reservation = () => {
   const navigate = useNavigate();
+  const { id } = useParams()
+  const [data, setData] = useState();
+  const [prenom, setPrenom] = useState('')
+  const [nom, setNom] = useState('')
+  const [nom_structure, setNom_structure] = useState('')
+  const [email, setEmail] = useState('')
+  const [telephone, setTelephone] = useState('')
+  const [adresse, setAdresse] = useState('')
+  const [region, setRegion] = useState('')
+  const [ville, setVille] = useState('')
+  const [pays, setPays] = useState('')
+  const [logo, setLogo] = useState(null)
+  const [serviceId, setServiceId] = useState(id)
+  const [montant_restant, setMontant_restant] = useState('')
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+
+
+  const getserviceid = async () => {
+    try {
+      const response = await api.getserviceid(id)
+      if (response) {
+        setData(response.data);
+
+      }
+    } catch (error) {
+      console.log(error)
+    }
   };
+
+
+  useEffect(() => {
+    getserviceid();
+  }, []);
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('prenom', prenom);
+    formData.append('nom', nom);
+    formData.append('nom_structure', nom_structure);
+    formData.append('email', email);
+    formData.append('telephone', telephone);
+    formData.append('adresse', adresse);
+    formData.append('region', region);
+    formData.append('ville', ville);
+    formData.append('pays', pays);
+    formData.append('logo', logo);
+    formData.append('serviceId', serviceId);
+    formData.append('montant_restant', montant_restant);
+
+    try {
+      const resp = await api.postuserstand(formData);
+      localStorage.setItem("response", JSON.stringify(resp.data));
+
+      // console.log(resp.data)
+      window.location.href = "/partenaire/FinReservation"
+
+    } catch (error) {
+      console.log(error)
+    }
+
+
+
+  }
+
+
   return (
     <div className="containe">
       <Header />
@@ -99,52 +158,165 @@ const Reservation = () => {
       <div className="main-section">
         <div className="section">
           <div className="main-container1">
-            <h1>Platinum</h1>
-            <p>
-              250.000 <span>cfa</span>{" "}
-            </p>
-            <table className="table">
-              <tr>
-                <td>stand 18 m²</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>1 page d'insertion dans le book</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>2 salons de 3 places</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>2 desks brandés</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Visibilité sur les supports de <br /> communication
-                </td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  2 Kakemonos dans la salle de <br /> plénière
-                </td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-            </table>
+            <>
+              <div>
+                <h1>{data?.nom_service}</h1>
+                <p>{data?.prix}</p>
+                <table className="table">
+                  <tr>
+                    <td>{data?.dimension}</td>
+                    <td className="icon">
+                      <CheckCircle />
+                    </td>
+                  </tr>
+                  {(() => {
+                    if (data?.book === null) {
+                    } else {
+                      return (
+                        <tr>
+                          <td>{data?.book}</td>
+                          <td className="icon">
+                            <CheckCircle />
+                          </td>
+                        </tr>
+                      )
+                    }
+                  })()}
+
+                  {(() => {
+                    if (data?.place === null) {
+                    } else {
+                      return (
+
+                        <tr>
+                          <td>{data?.place} </td>
+                          <td className="icon">
+                            <CheckCircle />
+                          </td>
+                        </tr>
+                      )
+                    }
+                  })()}
+
+
+                  {(() => {
+                    if (data?.desk === null) {
+                    } else {
+                      return (
+
+                        <tr>
+                          <td>{data?.desk} </td>
+                          <td className="icon">
+                            <CheckCircle />
+                          </td>
+                        </tr>
+                      )
+                    }
+                  })()}
+
+                  {(() => {
+                    if (data?.support_communication === null) {
+                    } else {
+                      return (
+                        <tr>
+                          <td>
+                            {data?.support_communication}
+                          </td>
+                          <td className="icon">
+                            <CheckCircle />
+                          </td>
+                        </tr>
+                      )
+                    }
+                  })()}
+
+                  {(() => {
+                    if (data?.Kakemono === "" || data?.Kakemono === null) {
+                    } else {
+                      return (
+                        <tr>
+                          <td>
+                            {data?.Kakemono}
+                          </td>
+                          <td className="icon">
+                            <CheckCircle />
+                          </td>
+                        </tr>
+                      )
+                    }
+                  })()}
+
+                  {(() => {
+                    if (data?.salle_pleniere === null) {
+                    } else {
+                      return (
+                        <tr>
+                          <td>
+                            {data?.salle_pleniere}
+                          </td>
+                          <td className="icon">
+                            <CheckCircle />
+                          </td>
+                        </tr>
+                      )
+                    }
+                  })()}
+
+                  {(() => {
+                    if (data?.salle_commission === null) {
+                    } else {
+                      return (
+                        <tr>
+                          <td>
+                            {data?.salle_commission}
+                          </td>
+                          <td className="icon">
+                            <CheckCircle />
+                          </td>
+                        </tr>
+                      )
+                    }
+                  })()}
+
+                  {(() => {
+                    if (data?.espace_networking === null) {
+                    } else {
+                      return (
+                        <tr>
+                          <td>
+                            {data?.espace_networking}
+                          </td>
+                          <td className="icon">
+                            <CheckCircle />
+                          </td>
+                        </tr>
+                      )
+                    }
+                  })()}
+
+                  {(() => {
+                    if (data?.publireportage === null) {
+                    } else {
+                      return (
+                        <tr>
+                          <td>
+                            {data?.publireportage}
+                          </td>
+                          <td className="icon">
+                            <CheckCircle />
+                          </td>
+                        </tr>
+                      )
+                    }
+                  })()}
+
+
+
+                </table>
+
+              </div>
+
+            </>
           </div>
 
           <span class="vertical-line"></span>
@@ -173,13 +345,9 @@ const Reservation = () => {
                   >
                     Formulaire
                   </p>
+                  <form onSubmit={handleSubmit}
+                    style={{ width: "240px", height: "100px" }}>
 
-                  <Box
-                    component="form"
-                    noValidate
-                    onSubmit={handleSubmit}
-                    sx={{ width: "240px", height: "100px" }}
-                  >
                     <div className="item">
                       <Grid
                         container
@@ -196,14 +364,19 @@ const Reservation = () => {
                               opacity: 0.5,
                             }}
                           >
-                            Prenom
+                            Prenoms
                           </p>
                           <TextField
-                            autoComplete="given-name"
-                            name="firstName"
+                            onChange={(e) => {
+                              setPrenom(e.target.value)
+                              setMontant_restant(data.prix)
+                            }}
+                            autoComplete="prenom"
+                            name="prenom"
+                            value={prenom}
                             required
                             fullWidth
-                            id="firstName"
+                            id="prenom"
                             autoFocus
                             sx={{
                               marginBottom: "-10px",
@@ -230,9 +403,11 @@ const Reservation = () => {
                           <TextField
                             required
                             fullWidth
-                            id="lastName"
-                            name="lastName"
-                            autoComplete="family-name"
+                            value={nom}
+                            onChange={(e) => setNom(e.target.value)}
+                            id="nom"
+                            name="nom"
+                            autoComplete="nom"
                             sx={{
                               background: "#F9FAFF",
                               marginBottom: "-10px",
@@ -253,13 +428,15 @@ const Reservation = () => {
                               opacity: 0.5,
                             }}
                           >
-                            Nom structure
+                            Structure
                           </p>
                           <TextField
                             required
                             fullWidth
-                            id="structure"
-                            name="email"
+                            onChange={(e) => setNom_structure(e.target.value)}
+                            value={nom_structure}
+                            id="nom_structure"
+                            name="nom_structure"
                             autoComplete="nom"
                             sx={{
                               background: "#F9FAFF",
@@ -282,14 +459,16 @@ const Reservation = () => {
                               fontSize: "12px",
                             }}
                           >
-                            Téléphone
+                            Région
                           </p>
                           <TextField
-                            autoComplete="phone"
-                            name="phone"
+                            autoComplete="region"
+                            name="region"
+                            onChange={(e) => setRegion(e.target.value)}
+                            value={region}
                             required
                             fullWidth
-                            id="phone"
+                            id="region"
                             autoFocus
                             sx={{
                               marginBottom: "-10px",
@@ -317,8 +496,72 @@ const Reservation = () => {
                             required
                             fullWidth
                             id="pays"
+                            onChange={(e) => setPays(e.target.value)}
+                            value={pays}
                             name="pays"
                             autoComplete="pays"
+                            sx={{
+                              marginBottom: "-10px",
+                              background: "#F9FAFF",
+                              border: "0.53437 1px solid #D5DCFF",
+                              "& .MuiInputBase-root": {
+                                height: 30,
+                              },
+                            }}
+                          />
+                        </Grid>
+
+                        <Grid item xs={12} sm={6}>
+                          <p
+                            style={{
+                              textAlign: "justify",
+                              textTransform: "uppercase",
+                              color: "#000000",
+                              opacity: 0.5,
+                              fontSize: "12px",
+                            }}
+                          >
+                            ville
+                          </p>
+                          <TextField
+                            autoComplete="ville"
+                            name="ville"
+                            onChange={(e) => setVille(e.target.value)}
+                            value={ville}
+                            required
+                            fullWidth
+                            id="ville"
+                            autoFocus
+                            sx={{
+                              marginBottom: "-10px",
+                              background: "#F9FAFF",
+                              border: "0.53437 1px solid #D5DCFF",
+                              "& .MuiInputBase-root": {
+                                height: 30,
+                              },
+                            }}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <p
+                            style={{
+                              textAlign: "justify",
+                              textTransform: "uppercase",
+                              color: "#000000",
+                              opacity: 0.5,
+                              fontSize: "12px",
+                            }}
+                          >
+                            Téléphone
+                          </p>
+                          <TextField
+                            required
+                            fullWidth
+                            id="telephone"
+                            onChange={(e) => setTelephone(e.target.value)}
+                            value={telephone}
+                            name="telephone"
+                            autoComplete="phone"
                             sx={{
                               marginBottom: "-10px",
                               background: "#F9FAFF",
@@ -346,6 +589,8 @@ const Reservation = () => {
                             fullWidth
                             id="email"
                             name="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             autoComplete="email"
                             sx={{
                               marginBottom: "-10px",
@@ -368,14 +613,16 @@ const Reservation = () => {
                               fontSize: "12px",
                             }}
                           >
-                            Email
+                            Adresse
                           </p>
                           <TextField
                             required
                             fullWidth
-                            id="email"
-                            name="email"
-                            autoComplete="email"
+                            onChange={(e) => setAdresse(e.target.value)}
+                            value={adresse}
+                            id="adresse"
+                            name="adresse"
+                            autoComplete="address"
                             sx={{
                               marginBottom: "-10px",
                               background: "#F9FAFF",
@@ -386,35 +633,70 @@ const Reservation = () => {
                             }}
                           />
                         </Grid>
+
+
+                        <Grid item xs={12}>
+                          <p
+                            style={{
+                              textAlign: "justify",
+                              textTransform: "uppercase",
+                              color: "#000000",
+                              opacity: 0.5,
+                              fontSize: "12px",
+                            }}
+                          >
+                            Logo
+                          </p>
+                          <input
+                            type="file"
+                            id="logo"
+                            name="logo"
+                            onChange={(e) => {
+                              console.log(e.target.files)
+                              setLogo(e.target.files[0])
+                            }
+                            }
+
+                          />
+
+                        </Grid>
                       </Grid>
+
+
+
+                      <div className="boutonreserve">
+                        <button
+                          type="submit"
+
+                        >
+                          Réserver
+                        </button>
+                      </div>
+
+
+
                     </div>
-                  </Box>
+
+
+                  </form>
                 </Box>
               </Container>
             </div>
           </div>
         </div>
       </div>
-      <div className="bton">
-        <Button
-          type="button"
-          onClick={() => navigate("/partenaire/FinReservation")}
-          fullWidth
-          sx={{
-            mt: 3,
-            mb: 2,
-            width: "8%",
-            backgroundColor: "#FCA13A",
-            color: "#fff",
-            fontSize: "14px",
-            textTransform: "none",
-            marginTop: "-90px",
-            marginLeft: "70px",
-          }}
-        >
-          Réserver
-        </Button>
-      </div>
+
+
+      {/* {(() => {
+        if () {
+        } else {
+          return (
+
+                         
+                        )
+        }
+      })()} */}
+
 
       <div className="stepper">
         <Stepper

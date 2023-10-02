@@ -1,6 +1,7 @@
 import React from "react";
 import CustomTable from "../Components/layouts/CustomTable";
 import Navbar from "../Components/navbar/Navbar";
+import ButtonPaiement from "../Components/layouts/ButtonPaiement";
 
 const Transaction = () => {
   return (
@@ -14,7 +15,11 @@ const Transaction = () => {
         <p>Transaction</p>
       </div>
 
-      <div className="main-card">
+      {/* <div className="">
+        <ButtonPaiement />
+      </div> */}
+
+      <div style={{ width: '80%', position: "relative", left: "300px", top: "-450px" }}>
         <CustomTable />
       </div>
     </div>

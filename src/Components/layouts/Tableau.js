@@ -13,16 +13,16 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import TextField from '@mui/material/TextField';
 import { useTheme } from '@mui/material/styles';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useParams } from "react-router-dom";
-import api from "../../service/api";
+import Select from '@mui/material/Select';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Notiflix from "notiflix";
+import api from "../../service/api";
+
+
 
 
 
@@ -41,15 +41,11 @@ export default function DataGridDemo() {
 
     "& .MuiDataGrid-columnHeaders": {
       color: "#B5BFC9",
-      backgroundColor: "none"
     },
 
     "& .MuiDataGrid-footerContainer": {
       display: "none",
       border: "none"
-    },
-    "&.MuiDataGrid-columnHeader--moving": {
-      backgroundColor: "none"
     }
 
   };
@@ -71,7 +67,7 @@ export default function DataGridDemo() {
     {
       field: "id",
       headerName: "ID",
-      width: 20,
+      width: 50,
       renderHeader: (params: GridColumnHeaderParams) => {
         return <RenderHeaderComponent {...params} />
       },
@@ -92,7 +88,7 @@ export default function DataGridDemo() {
     {
       field: "prenom",
       headerName: "Prénom",
-      width: 90,
+      width: 130,
       renderHeader: (params) => {
         return <RenderHeaderComponent {...params} />
       },
@@ -114,7 +110,7 @@ export default function DataGridDemo() {
     {
       field: "nom",
       headerName: "Nom",
-      width: 70,
+      width: 90,
       renderHeader: (params) => {
         return <RenderHeaderComponent {...params} />
       },
@@ -137,7 +133,7 @@ export default function DataGridDemo() {
 
       field: "kits",
       headerName: "Service",
-      width: 90,
+      width: 130,
       valueGetter: (params) => {
         const serviceValue = params.row.kits;
         const service = params.row.nom_service;
@@ -165,7 +161,7 @@ export default function DataGridDemo() {
     {
       field: "nom_structure",
       headerName: "Structure",
-      width: 90,
+      width: 160,
       renderHeader: (params) => {
         return <RenderHeaderComponent {...params} />
       },
@@ -187,7 +183,7 @@ export default function DataGridDemo() {
     {
       field: "adresse",
       headerName: "Adresse ",
-      width: 90,
+      width: 100,
       renderHeader: (params) => {
         return <RenderHeaderComponent {...params} />
       },
@@ -211,30 +207,6 @@ export default function DataGridDemo() {
       field: "telephone",
       headerName: "Tel",
       //width: 90,
-      maxWidth: 80,
-      flex: 1,
-      renderHeader: (params) => {
-        return <RenderHeaderComponent {...params} />
-      },
-      renderCell: (cellValues) => {
-        return (
-          <div
-            style={{
-              color: "#68727B",
-              fontSize: 12,
-              fontWeight: 400
-            }}
-          >
-            {cellValues.value}
-          </div>
-        );
-      }
-    },
-
-    {
-      field: "logo",
-      headerName: "Logo",
-      //width: 90,
       minWidth: 50,
       flex: 1,
       renderHeader: (params) => {
@@ -257,7 +229,7 @@ export default function DataGridDemo() {
     {
       field: "prix_service",
       headerName: "Montant",
-      width: 50,
+      width: 90,
       sortable: false,
       flex: 1,
       renderHeader: (params) => {
@@ -281,7 +253,7 @@ export default function DataGridDemo() {
       field: "montant_restant",
       headerName: "Restant",
       //width: 90,
-      maxWidth: 70,
+      minWidth: 50,
       flex: 1,
       renderHeader: (params) => {
         return <RenderHeaderComponent {...params} />
@@ -355,7 +327,7 @@ export default function DataGridDemo() {
       headerName: "Action",
       sortable: false,
       disableColumnMenu: true,
-      minWidth: 20,
+      minWidth: 60,
       flex: 1,
       renderHeader: (params) => {
         return <RenderHeaderComponent {...params} />
@@ -466,6 +438,7 @@ export default function DataGridDemo() {
     };
 
     const [opened, setOpen] = React.useState(false);
+
     const theme = useTheme();
 
     const handleClickOpen = () => {
@@ -473,9 +446,12 @@ export default function DataGridDemo() {
 
     };
 
+
+
     const handleClosed = () => {
       setOpen(false);
     };
+
 
 
 
@@ -487,6 +463,8 @@ export default function DataGridDemo() {
     const [numero_transaction, setNumero_transaction] = useState('')
     const [transactionId, setTransactionId] = useState('')
     const service = params.row;
+    const montant_restant = params.row.montant_restant;
+
 
 
 
@@ -503,11 +481,14 @@ export default function DataGridDemo() {
 
 
       }
-      console.log(inputData)
+      // console.log(inputData)
 
       try {
         const resp = await api.createpaiement(inputData);
-        console.log(resp.data)
+        // console.log(resp.data)
+        Notiflix.Loading.standard("Paiement en cours...", { svgColor: "#FCA13A" });
+        window.location.reload();
+        handleClosed();
 
 
       } catch (error) {
@@ -516,6 +497,9 @@ export default function DataGridDemo() {
 
 
     }
+
+
+
 
 
     return (
@@ -529,17 +513,19 @@ export default function DataGridDemo() {
         }}
       >
 
-        <IconButton
-          onClick={handleClick}
-          aria-controls={open ? 'account-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          style={{ color: "#1B2126" }}
 
-        >
-          <MoreHorizIcon />
-        </IconButton>
+        <div >
+          <IconButton
+            onClick={handleClick}
+            aria-controls={open ? 'account-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            style={{ color: "#b1e0e9", fontWeight: "700" }}
 
+          >
+            <MoreHorizIcon />
+          </IconButton>
+        </div>
         <Menu
           anchorEl={anchorEl}
           id="account-menu"
@@ -558,11 +544,10 @@ export default function DataGridDemo() {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <MenuItem onClick={
-            handleClickOpen} style={{ fontSize: "12px", backgroundColor: "#fff3e4", borderRadius: "10px", color: "#666666", width: "130px", justifyContent: "center", marginLeft: "15px" }}>
+
+          <MenuItem onClick={handleClickOpen} style={{ fontSize: "12px", backgroundColor: "#fff3e4", borderRadius: "10px", color: "#666666", width: "130px", justifyContent: "center", marginLeft: "15px" }}>
             nouveau paiement
           </MenuItem>
-
           <Dialog
             open={opened}
             onClose={handleClosed}
@@ -672,7 +657,13 @@ export default function DataGridDemo() {
                         <TextField
                           name="montant"
                           onChange={(e) => {
-                            setMontant(e.target.value)
+                            if ((e.target.value) <= montant_restant) {
+                              setMontant(e.target.value)
+
+                            } else {
+                              return "le montant doit inferieur à montant restant"
+                            }
+
                           }}
                           value={montant}
                           required
@@ -698,9 +689,10 @@ export default function DataGridDemo() {
             </form>
           </Dialog>
 
-
-
         </Menu>
+
+
+
       </div >
 
     );
@@ -708,7 +700,7 @@ export default function DataGridDemo() {
 
 
 
-  const RenderHeaderComponent = (params) => {
+  const RenderHeaderComponent = (params: GridColumnHeaderParams) => {
     return (
       <Box display="flex" sx={{ alignItems: 'center' }}>
         <Box>{params.colDef.headerName}</Box>
@@ -720,8 +712,9 @@ export default function DataGridDemo() {
   const getallreservation = async () => {
     try {
       const reponse = await api.getallreservation()
-      console.log(reponse.data)
-      setTableData(reponse.data)
+      // console.log(reponse.data)
+      const dataTable = reponse.data;
+      setTableData(dataTable.slice(-5))
     } catch (error) {
       console.log(error)
     }
@@ -735,7 +728,7 @@ export default function DataGridDemo() {
 
 
   return (
-    <div style={{ height: 600, width: "100%" }}>
+    <div style={{ height: 318, width: "100%" }}>
       <DataGrid
         //toolBar={<Toolbar sx={{ backgroundColor: "blue" }} />}
 

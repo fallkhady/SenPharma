@@ -16,9 +16,10 @@
 
 .mdp {
     text-align: right;
+    margin-left: 150px;
     text-decoration: none;
     position: relative;
-    bottom: 20px;
+    bottom: 200px;
     color: #000000;
     opacity: 0.5;
     font-size: 14px;
@@ -63,9 +64,33 @@
     justify-content: center;
     margin-left: 300px;
     width: 60%;
-    height: 73vh;
+    height: 105vh;
 
 
+}
+
+
+.boutonreserve button{
+    padding: 15px 20px;
+    background: #FCA13A;
+    border: none;
+    color: #fff;
+    position: relative;
+    right: 250px;
+   
+                          
+}
+
+.boutonreserve1 button{
+    padding: 15px 20px;
+    background: #FCA13A;
+    border: none;
+    color: #fff;
+    position: relative;
+    right: 250px;
+    margin-top: 50px;
+   
+                          
 }
 
 .main-container1 {
@@ -79,7 +104,7 @@
 
 .main-container1 p {
     color: #0F3F62;
-    font-size: 40px;
+    font-size: 60px;
     font-weight: 600;
     margin-top: 20px;
 }
@@ -90,9 +115,17 @@
     margin-top: 20px;
 }
 
-
+.stepper{
+    margin-top: 60px;
+    margin-left: 30px;
+}
 
 @media (max-width:768px) {
+
+    .boutonreserve button{
+        position: relative;
+        left: 50px;
+    }
 
     .containe {
         height: 100%;
@@ -152,6 +185,22 @@
     align-items: center;
 }
 
+.main-card4{
+    padding-top: 150px;
+}
+ .card4{
+    background-color: #fff;
+    height: 330px;
+    justify-content: center;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 550px;
+    border-radius: 15px;
+
+}
+
 .card {
     background-color: #fff;
     height: 330px;
@@ -165,15 +214,21 @@
 
 }
 
-.card p {
-    padding-top: 120px;
+
+
+.card4 p {
+    padding-top: 50px;
     font-size: 60px;
     color: #0F3F62;
     font-weight: 600;
 
 }
 
-.card span {
+
+
+
+
+.card4 span {
     line-height: 60px;
     background-color: #FCA13A;
     color: #fff;

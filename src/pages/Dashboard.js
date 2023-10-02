@@ -4,7 +4,7 @@ import "./style.css";
 import Chart2 from "../Components/layouts/Chart2";
 import Chart1 from "../Components/layouts/Chart1";
 import Chart3 from "../Components/layouts/Chart3";
-import Tableau from "../Components/Tableau";
+import Tableau from "../Components/layouts/Tableau";
 
 const Dashboard = () => {
   return (
@@ -34,6 +34,7 @@ const Dashboard = () => {
         </div>
 
         <div className="tableau">
+          <p style={{ textAlign: "left", fontWeight: "500" }}>Transactions récentes</p>
           <Tableau />
         </div>
       </div>

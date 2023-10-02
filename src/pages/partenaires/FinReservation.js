@@ -54,7 +54,6 @@ const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
 
 function ColorlibStepIcon(props) {
   const { active, completed, className } = props;
-
   const icons = {
     1: "",
     2: "",
@@ -75,13 +74,17 @@ function ColorlibStepIcon(props) {
 const steps = ["Choix", "Formulaire", "Reservation", "Merci"];
 
 const FinReservation = () => {
+
+  const responseData = localStorage.getItem("response")
+
   return (
     <div className="containe">
       <Header />
 
-      <div className="main-card">
-        <div className="card">
+      <div className="main-card4">
+        <div className="card4">
           <p>Merci</p>
+          <h3>{responseData}</h3>
           <span>Senpharma.sn</span>
         </div>
       </div>
@@ -89,7 +92,7 @@ const FinReservation = () => {
       <div className="steppe">
         <Stepper
           alternativeLabel
-          activeStep={3}
+          activeStep={4}
           connector={<ColorlibConnector />}
           sx={{
             width: "300px",

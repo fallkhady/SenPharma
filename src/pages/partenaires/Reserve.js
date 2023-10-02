@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CheckCircle } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import Header from "../../Components/header/Header";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -11,6 +10,11 @@ import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
 import "./style.css";
+import api from "../../service/api"
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "../../Components/Slider/slide.css"
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -76,8 +80,44 @@ function ColorlibStepIcon(props) {
 }
 
 const steps = ["Choix", "Formulaire", "Reservation", "Merci"];
+
+
 const Reserve = () => {
+
+  const [data, setData] = useState([]);
+  const [id, setId] = useState([]);
+  const [typeService, setTypeService] = useState([]);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const getservice = async () => {
+    try {
+
+      const { data } = await api.getservice()
+      if (data) {
+        localStorage.setItem("service", JSON.stringify(data));
+        const service = JSON.parse(localStorage.getItem("service"))
+        const serviceStand = Object.values(service).filter(user => user.type_service === "STAND");
+        // console.log(serviceStand)
+        setData(serviceStand)
+
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+
+
+
+  };
+
+
+
+
+
+
+  useEffect(() => {
+    getservice();
+  }, []);
 
   const checkNext = () => {
     const labels = document.querySelectorAll("#slider label ");
@@ -87,200 +127,236 @@ const Reserve = () => {
   };
 
   const check = (index) => setSelectedIndex(index);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    initialSlide: 1,
+
+
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
   return (
     <div className="containe">
       <Header />
-      <div className="button">
-        <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-orange-100 text-orange-500 mb-5 flex-shrink-0">
-          <a onClick={checkNext}>{"<"}</a>
-        </div>
-      </div>
-      <div className="md:w-2/4 md:mb-0 mb-6 flex flex-col text-center items-center">
-        <section id="slider">
-          <input
-            type="radio"
-            name="slider"
-            id="s1"
-            checked={selectedIndex === 0}
-            onClick={() => check(0)}
-          />
-          <input
-            type="radio"
-            name="slider"
-            id="s2"
-            checked={selectedIndex === 1}
-            onClick={() => check(1)}
-          />
-          <input
-            type="radio"
-            name="slider"
-            id="s3"
-            checked={selectedIndex === 2}
-            onClick={() => check(2)}
-          />
 
-          <label htmlFor="s1" id="slide1">
-            <h1>Baneex</h1>
-            <p>
-              100.000 <span>cfa</span>{" "}
-            </p>
-            <table className="table1">
-              <tr>
-                <td>All Limited Link</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>Upload unlimeted </td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>Get Membership</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>Free Sharing & Acces</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-            </table>
-            <Link
-              type="submit"
-              name="slider"
-              fullWidth
-              className="btn"
-              to="/partenaire/reservation"
-            >
-              Réserver
-            </Link>
-          </label>
-          <label htmlFor="s2" id="slide2">
-            <h1>Platinum</h1>
-            <p>
-              250.000 <span>cfa</span>{" "}
-            </p>
-            <table className="table">
-              <tr>
-                <td>stand 18 m²</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>1 page d'insertion dans le book</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>2 salons de 3 places</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>2 desks brandés</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Visibilité sur les supports de <br /> communication
-                </td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  2 Kakemonos dans la salle de <br /> plénière
-                </td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-            </table>
-            <Link
-              type="submit"
-              name="slider"
-              fullWidth
-              className="btn"
-              to="/partenaire/reservation"
-            >
-              Réserver
-            </Link>
-          </label>
-          <label htmlFor="s3" id="slide3">
-            <h1>OR</h1>
-            <p>
-              100.000 <span>cfa</span>{" "}
-            </p>
-            <table className="table">
-              <tr>
-                <td>stand 18 m²</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>1 page d'insertion dans le book</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>2 salons de 3 places</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>2 desks brandés</td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Visibilité sur les supports de <br /> communication
-                </td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  2 Kakemonos dans la salle de <br /> plénière
-                </td>
-                <td className="icon">
-                  <CheckCircle />
-                </td>
-              </tr>
-            </table>
-            <Link
-              type="submit"
-              name="slider"
-              fullWidth
-              className="btn"
-              to="/partenaire/reservation"
-            >
-              Réserver
-            </Link>
-          </label>
-        </section>
-      </div>
-      <div className="button1">
-        <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-orange-100 text-orange-500 mb-5 flex-shrink-0">
-          <a onClick={checkNext}>{">"}</a>
+      <div className="slide">
+
+        <div className="slider"
+          style={{
+            width: "900px",
+            display: true ? "block" : "none"
+          }}
+        >
+
+          <Slider {...settings}>
+            {data.map((item, i) =>
+              <>
+                <div className="s">
+                  <h1>{item?.nom_service}</h1>
+                  <p>{item?.prix}</p>
+                  <table className="table">
+                    <tr>
+                      <td>{item?.dimension}</td>
+                      <td className="icon">
+                        <CheckCircle />
+                      </td>
+                    </tr>
+                    {(() => {
+                      if (item?.book === null) {
+                      } else {
+                        return (
+                          <tr>
+                            <td>{item?.book}</td>
+                            <td className="icon">
+                              <CheckCircle />
+                            </td>
+                          </tr>
+                        )
+                      }
+                    })()}
+
+                    {(() => {
+                      if (item?.place === null) {
+                      } else {
+                        return (
+
+                          <tr>
+                            <td>{item?.place} </td>
+                            <td className="icon">
+                              <CheckCircle />
+                            </td>
+                          </tr>
+                        )
+                      }
+                    })()}
+
+
+                    {(() => {
+                      if (item?.desk === null) {
+                      } else {
+                        return (
+
+                          <tr>
+                            <td>{item?.desk} </td>
+                            <td className="icon">
+                              <CheckCircle />
+                            </td>
+                          </tr>
+                        )
+                      }
+                    })()}
+
+                    {(() => {
+                      if (item?.support_communication === null) {
+                      } else {
+                        return (
+                          <tr>
+                            <td>
+                              {item?.support_communication}
+                            </td>
+                            <td className="icon">
+                              <CheckCircle />
+                            </td>
+                          </tr>
+                        )
+                      }
+                    })()}
+
+                    {(() => {
+                      if (item?.Kakemono === "" || item?.Kakemono === null) {
+                      } else {
+                        return (
+                          <tr>
+                            <td>
+                              {item?.Kakemono}
+                            </td>
+                            <td className="icon">
+                              <CheckCircle />
+                            </td>
+                          </tr>
+                        )
+                      }
+                    })()}
+
+                    {(() => {
+                      if (item?.salle_pleniere === null) {
+                      } else {
+                        return (
+                          <tr>
+                            <td>
+                              {item?.salle_pleniere}
+                            </td>
+                            <td className="icon">
+                              <CheckCircle />
+                            </td>
+                          </tr>
+                        )
+                      }
+                    })()}
+
+                    {(() => {
+                      if (item?.salle_commission === null) {
+                      } else {
+                        return (
+                          <tr>
+                            <td>
+                              {item?.salle_commission}
+                            </td>
+                            <td className="icon">
+                              <CheckCircle />
+                            </td>
+                          </tr>
+                        )
+                      }
+                    })()}
+
+                    {(() => {
+                      if (item?.espace_networking === null) {
+                      } else {
+                        return (
+                          <tr>
+                            <td>
+                              {item?.espace_networking}
+                            </td>
+                            <td className="icon">
+                              <CheckCircle />
+                            </td>
+                          </tr>
+                        )
+                      }
+                    })()}
+
+                    {(() => {
+                      if (item?.publireportage === null) {
+                      } else {
+                        return (
+                          <tr>
+                            <td>
+                              {item?.publireportage}
+                            </td>
+                            <td className="icon">
+                              <CheckCircle />
+                            </td>
+                          </tr>
+                        )
+                      }
+                    })()}
+
+
+
+                  </table>
+
+                  <Link
+                    type="submit"
+                    name="slider"
+                    fullWidth
+                    className="btn"
+                    to={`/partenaire/reservation/${item.id}`}
+                  >
+
+                    Réserver
+                  </Link>
+
+
+                </div>
+
+              </>
+            )}
+
+          </Slider>
+
         </div>
       </div>
+
       <div className="step">
         <Stepper
           alternativeLabel
@@ -289,7 +365,7 @@ const Reserve = () => {
           sx={{
             width: "30%",
             margin: "0 auto",
-            marginTop: "135px",
+            marginTop: "35px",
             backgroundColor: "#fff",
             borderRadius: "10px",
             padding: "8px 10px",
@@ -313,7 +389,7 @@ const Reserve = () => {
           ))}
         </Stepper>
       </div>
-    </div>
+    </div >
   );
 };
 

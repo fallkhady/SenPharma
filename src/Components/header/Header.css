@@ -16,7 +16,7 @@ body {
         url('../../images/image1.png');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 105vh;
+    height: 150vh;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -41,10 +41,14 @@ body {
 
 
 .active {
-    background-color: #F5841F;
-    border-radius: 20px;
+    background: linear-gradient(83.26deg, #F5841F 17.33%, #FFC380 83.63%);
+    border-radius: 18px;
     color: #FFFF;
-    padding: 8px 15px;
+    padding: 10px 15px;
+}
+
+a{
+    color: #BFBFBF;
 }
 
 .active:hover {

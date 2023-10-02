@@ -10,11 +10,11 @@ const Chart1 = () => {
         <div>
 
 
-            <PieChart width={280} height={200}>
+            <PieChart width={200} height={200}>
 
                 <Pie
                     data={data}
-                    cx={130}
+                    cx={100}
                     cy={100}
                     startAngle={280}
                     endAngle={0}
